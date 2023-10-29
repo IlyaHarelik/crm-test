@@ -3,23 +3,18 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard 2</title>
+    <title> {{ __('content.companies.tab-title') }} </title>
 
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="{{ asset('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback') }}">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+    @include('includes.links')
+
 </head>
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
 
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__wobble" src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo" height="60" width="60">
+        <img class="animation__wobble" src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo" height="60"
+             width="60">
     </div>
 
     @include('includes.navbar')
@@ -31,10 +26,15 @@
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
-                <div class="row mb-2">
+                <div class="row mb-2  d-flex justify-content-between">
                     <div class="col-sm-6">
                         <h1 class="m-0"> {{ __('content.companies.title') }}</h1>
+
                     </div><!-- /.col -->
+                    <div class="mr-3">
+                        <a href="{{ route('admin.companies.export') }}"
+                           class="btn btn-success">{{ __('content.action.export') }}</a>
+                    </div>
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
@@ -55,8 +55,6 @@
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-<!-- jQuery -->
-<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- overlayScrollbars -->
@@ -73,7 +71,31 @@
 <!-- ChartJS -->
 <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
 
-<!-- AdminLTE for demo purposes -->
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 </body>
+
+<script type="text/javascript">
+    $(function () {
+        let table = $('#companies-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('admin.companies.index') }}",
+            columns: [
+                {data: 'id', name: 'id'},
+                {data: 'name', name: 'name'},
+                {data: 'email', name: 'email'},
+                {data: 'phone', name: 'phone'},
+                {data: 'website', name: 'website'},
+                {data: 'note', name: 'note'},
+                {data: 'action', name: 'action'},
+            ],
+            @if(app()->getLocale() === 'ru')
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json',
+            },
+            @endif
+
+        });
+
+    });
+</script>
 </html>
