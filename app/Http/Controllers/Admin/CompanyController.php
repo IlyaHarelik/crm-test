@@ -17,8 +17,9 @@ class CompanyController extends Controller
             return Datatables::of($companies)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
-                    return $actionBtn;
+                    return '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">'
+                        . __('content.action.edit'). '</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">'
+                        . __('content.action.delete'). '</a>';
                 })
                 ->rawColumns(['action'])
                 ->make(true);
