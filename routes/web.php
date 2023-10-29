@@ -28,9 +28,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
         ->only(['index'])
     ;
 
+    Route::get('/export/companies', [CompanyController::class, 'exportToExcel'])->name('companies.export');
+
     Route::resource('employees', EmployeeController::class)
         ->only(['index'])
     ;
+
+    Route::get('/export/employees', [EmployeeController::class, 'exportToExcel'])->name('employees.export');
 });
 
 Route::post('/language-switch', [LanguageController::class, 'languageSwitch'])->name('language.switch');

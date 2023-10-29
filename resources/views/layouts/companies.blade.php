@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> Companies | CRM</title>
+    <title> {{ __('content.companies.tab-title') }} </title>
 
-@include('includes.links')
+    @include('includes.links')
 
 </head>
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -13,7 +13,8 @@
 
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__wobble" src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo" height="60" width="60">
+        <img class="animation__wobble" src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo" height="60"
+             width="60">
     </div>
 
     @include('includes.navbar')
@@ -25,10 +26,15 @@
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
-                <div class="row mb-2">
+                <div class="row mb-2  d-flex justify-content-between">
                     <div class="col-sm-6">
                         <h1 class="m-0"> {{ __('content.companies.title') }}</h1>
+
                     </div><!-- /.col -->
+                    <div class="mr-3">
+                        <a href="{{ route('admin.companies.export') }}"
+                           class="btn btn-success">{{ __('content.action.export') }}</a>
+                    </div>
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
@@ -84,9 +90,10 @@
             ],
             @if(app()->getLocale() === 'ru')
             language: {
-                url:  '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json',
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json',
             },
             @endif
+
         });
 
     });

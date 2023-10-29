@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\EmployeeExport;
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Yajra\DataTables\Facades\Datatables;
 
 class EmployeeController extends Controller
@@ -37,5 +40,10 @@ class EmployeeController extends Controller
         }
 
         return view('pages.employees',);
+    }
+
+    public function exportToExcel(): BinaryFileResponse
+    {
+        return Excel::download(new EmployeeExport, 'companies.xlsx');
     }
 }

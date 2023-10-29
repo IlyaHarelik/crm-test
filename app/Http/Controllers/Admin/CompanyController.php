@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\CompanyExport;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Yajra\DataTables\Facades\Datatables;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CompanyController extends Controller
 {
@@ -26,5 +29,10 @@ class CompanyController extends Controller
         }
 
         return view('pages.companies',);
+    }
+
+    public function exportToExcel(): BinaryFileResponse
+    {
+        return Excel::download(new CompanyExport, 'companies.xlsx');
     }
 }

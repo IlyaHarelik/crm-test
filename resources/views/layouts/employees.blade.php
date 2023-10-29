@@ -24,10 +24,15 @@
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
-                <div class="row mb-2">
+                <div class="row mb-2  d-flex justify-content-between">
                     <div class="col-sm-6">
                         <h1 class="m-0"> {{ __('content.employees.title') }}</h1>
+
                     </div><!-- /.col -->
+                    <div class="mr-3">
+                        <a href="{{ route('admin.employees.export') }}"
+                           class="btn btn-success">{{ __('content.action.export') }}</a>
+                    </div>
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>

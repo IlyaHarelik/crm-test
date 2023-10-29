@@ -10,7 +10,7 @@
             <th>{{ __('content.companies.table.phone') }}</th>
             <th width="105px">{{ __('content.companies.table.website') }}</th>
             <th>{{ __('content.companies.table.note') }}</th>
-            <th width="150px">{{ __('content.companies.table.actions') }}</th>
+            <th width="150px">{{ __('content.companies.table.action') }}</th>
         </tr>
         </thead>
         <tbody>

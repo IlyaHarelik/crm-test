@@ -3,12 +3,16 @@
 return [
     'main' => [
         'title' => 'Main Page',
+        'welcome-text' => 'Welcome to the CRM-TEST!
+        To continue, select the desired table from the list.',
     ],
     'action' => [
         'edit' => 'Edit',
         'delete' => 'Delete',
+        'export' => 'Export to Excel',
     ],
     'companies' => [
+        'tab-title' => 'Companies | CRM',
         'title' => 'Companies',
         'table' => [
             'name' => 'Name',
