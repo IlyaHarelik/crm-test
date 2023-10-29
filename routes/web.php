@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\CompanyController;
+use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\LanguageController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,12 +18,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/admin');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], function () {
+    Route::get('/', IndexController::class)->name('index');
+
+    Route::resource('companies', CompanyController::class)
+        ->only(['index'])
+    ;
+
+    Route::resource('employees', EmployeeController::class)
+        ->only(['index'])
+    ;
+});
 
 Route::post('/language-switch', [LanguageController::class, 'languageSwitch'])->name('language.switch');
 
