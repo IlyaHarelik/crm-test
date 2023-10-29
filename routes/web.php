@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\Admin\CompaniesController;
+use App\Http\Controllers\Admin\CompanyController;
+use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\Route;
@@ -22,7 +23,12 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], function () {
     Route::get('/', IndexController::class)->name('index');
-    Route::resource('companies', CompaniesController::class)
+
+    Route::resource('companies', CompanyController::class)
+        ->only(['index'])
+    ;
+
+    Route::resource('employees', EmployeeController::class)
         ->only(['index'])
     ;
 });

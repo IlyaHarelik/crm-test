@@ -6,5 +6,8 @@ return [
     ],
     'companies' => [
         'title' => 'Компании',
+    ],
+    'employees' => [
+        'title' => 'Сотрудники'
     ]
 ];

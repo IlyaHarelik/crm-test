@@ -34,7 +34,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.companies.index') }}" class="nav-link">
+                    <a href="{{ route('admin.employees.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             {{ __('sidebar.employees') }}
