@@ -50,6 +50,7 @@
     </div>
     <!-- /.content-wrapper -->
 
+
     @include('includes.footer')
 </div>
 <!-- ./wrapper -->

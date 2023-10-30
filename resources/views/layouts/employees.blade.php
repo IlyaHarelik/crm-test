@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard 2</title>
+    <title> {{ __('content.employees.tab-title') }} </title>
 
     @include('includes.links')
+
 </head>
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
@@ -24,16 +26,17 @@
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
-                <div class="row mb-2  d-flex justify-content-between">
-                    <div class="col-sm-6">
-                        <h1 class="m-0"> {{ __('content.employees.title') }}</h1>
+                <div class="row d-flex justify-content-between">
+                    <div class="col-sm-6 d-flex">
+                        <h1 class="m-0">{{ __('content.employees.title') }}</h1>
+                        <a href="{{ route('admin.companies.export') }}" class="btn btn-success ml-3">{{ __('content.action.export') }}</a>
 
                     </div><!-- /.col -->
-                    <div class="mr-3">
-                        <a href="{{ route('admin.employees.export') }}"
-                           class="btn btn-success">{{ __('content.action.export') }}</a>
+
+                    <div class="col-sm-6 text-right">
+                        <a onclick="add()" href="javascript:void(0)" class="btn btn-success">{{ __('content.action.create') }}</a>
                     </div>
-                </div><!-- /.row -->
+                </div>
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
@@ -47,6 +50,7 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+    @include('includes.create-employee-modal')
 
     @include('includes.footer')
 </div>
@@ -92,23 +96,14 @@
             language: {
                 url:  '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json',
             },
+            @endif
             columnDefs: [
                 {
                     targets: [4],
                     width: '150px',
                 },
             ],
-            @endif
         });
     });
 </script>
 </html>
-
-<th>id</th>
-<th >{{ __('content.employees.table.first_name') }}</th>
-<th>{{ __('content.employees.table.last_name') }}</th>
-<th>{{ __('content.employees.table.company') }}</th>
-<th width="105px">{{ __('content.employees.table.email') }}</th>
-<th>{{ __('content.employees.table.phone') }}</th>
-<th width="150px">{{ __('content.employees.table.note') }}</th>
-<th width="150px">{{ __('content.employees.table.actions') }}</th>

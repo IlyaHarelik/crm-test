@@ -67,3 +67,5 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 
 alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
+sail artisan migrate --seed
+sail artisan storage:link 

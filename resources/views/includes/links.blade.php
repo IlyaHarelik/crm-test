@@ -7,7 +7,6 @@
 <!-- Theme style -->
 <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
 
-<meta name="csrf-token" content="{{ csrf_token() }}">
 <link href="{{ asset('https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet">
 <script src="{{ asset('https://code.jquery.com/jquery-3.5.1.js') }}"></script>
 <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js') }}"></script>

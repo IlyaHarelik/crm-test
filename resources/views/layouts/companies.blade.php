@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title> {{ __('content.companies.tab-title') }} </title>
@@ -26,16 +27,17 @@
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
-                <div class="row mb-2  d-flex justify-content-between">
-                    <div class="col-sm-6">
-                        <h1 class="m-0"> {{ __('content.companies.title') }}</h1>
+                <div class="row d-flex justify-content-between">
+                    <div class="col-sm-6 d-flex">
+                        <h1 class="m-0">{{ __('content.companies.title') }}</h1>
+                        <a href="{{ route('admin.companies.export') }}" class="btn btn-success ml-3">{{ __('content.action.export') }}</a>
 
                     </div><!-- /.col -->
-                    <div class="mr-3">
-                        <a href="{{ route('admin.companies.export') }}"
-                           class="btn btn-success">{{ __('content.action.export') }}</a>
+
+                    <div class="col-sm-6 text-right">
+                        <a onclick="add()" href="javascript:void(0)" class="btn btn-success">{{ __('content.action.create') }}</a>
                     </div>
-                </div><!-- /.row -->
+                </div>
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
@@ -49,6 +51,7 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+    @include('includes.create-company-modal')
 
     @include('includes.footer')
 </div>
@@ -81,21 +84,32 @@
             ajax: "{{ route('admin.companies.index') }}",
             columns: [
                 {data: 'id', name: 'id'},
+                {
+                    data: 'logo_filename',
+                    name: 'logo_filename',
+                    render: function (data, type, full, meta) {
+                        if (data) {
+                            return '<img src="' + '{{ asset('') }}' + data + '" width="50" height="50">';
+                        } else {
+                            return '';
+                        }
+                    }
+                },
                 {data: 'name', name: 'name'},
                 {data: 'email', name: 'email'},
                 {data: 'phone', name: 'phone'},
                 {data: 'website', name: 'website'},
                 {data: 'note', name: 'note'},
                 {data: 'action', name: 'action'},
+
             ],
             @if(app()->getLocale() === 'ru')
             language: {
-                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json',
+                url:  'https://cdn.datatables.net/plug-ins/1.13.6/i18n/ru.json',
             },
             @endif
-
         });
-
     });
 </script>
+
 </html>

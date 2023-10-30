@@ -25,18 +25,28 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
     Route::get('/', IndexController::class)->name('index');
 
     Route::resource('companies', CompanyController::class)
-        ->only(['index'])
-    ;
+        ->only([
+            'index',
+            'store',
+            'edit',
+            'update',
+            'destroy',
+        ]);
 
     Route::get('/export/companies', [CompanyController::class, 'exportToExcel'])->name('companies.export');
 
     Route::resource('employees', EmployeeController::class)
-        ->only(['index'])
-    ;
+        ->only([
+            'index',
+            'store',
+            'edit',
+            'update',
+            'destroy',
+            ]);
 
     Route::get('/export/employees', [EmployeeController::class, 'exportToExcel'])->name('employees.export');
 });
 
 Route::post('/language-switch', [LanguageController::class, 'languageSwitch'])->name('language.switch');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
