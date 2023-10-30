@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Exports\CompanyExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CreateCompanyRequest;
+use App\Http\Requests\Admin\DestroyCompanyRequest;
 use App\Http\Requests\Admin\UpdateCompanyRequest;
 use App\Models\Company;
 use Illuminate\Http\JsonResponse;
@@ -77,6 +78,7 @@ class CompanyController extends Controller
 
         if ($request->hasFile('logo')) {
             $logoPath = $request->file('logo')->store('public/company_logos');
+            $logoPath = str_replace('public', 'storage', $logoPath);
             $company->logo_filename = $logoPath;
         }
 
@@ -85,16 +87,13 @@ class CompanyController extends Controller
         return response()->json($company);
     }
 
-    public function destroy($id)
+    public function destroy(DestroyCompanyRequest $id)
     {
-        $company = Company::find($id);
-
-        if (!$company) {
-            return response()->json(['error' => 'Company not found'], 404);
-        }
+        /** @var Company $company */
+        $company = Company::find($id)->first();
 
         $company->employees()->delete();
-
+        $company->delete();
 
         return Response()->json($company);
     }

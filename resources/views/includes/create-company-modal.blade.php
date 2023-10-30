@@ -111,7 +111,6 @@
 
     function deleteFunc(id){
         if (confirm("Delete Record?") === true) {
-            // ajax
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
