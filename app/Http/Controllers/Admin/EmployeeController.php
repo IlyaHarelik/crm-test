@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Exports\EmployeeExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CreateEmployeeRequest;
+use App\Http\Requests\Admin\DestroyCompanyRequest;
 use App\Http\Requests\Admin\UpdateEmployeeRequest;
 use App\Models\Company;
 use App\Models\Employee;
@@ -83,13 +84,16 @@ class EmployeeController extends Controller
         return response()->json($employee);
     }
 
-    public function destroy($id)
+    public function destroy(DestroyCompanyRequest $id)
     {
-        $employee = Employee::find($id);
+        /** @var Employee $employee */
+        $employee = Employee::find($id)->first();
 
         if (!$employee) {
             return response()->json(['error' => 'Employee not found'], 404);
         }
+
+        $employee->delete();
 
         return Response()->json($employee);
     }
