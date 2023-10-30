@@ -5,6 +5,7 @@
         <thead>
         <tr>
             <th>id</th>
+            <th>{{ __('content.companies.table.logo') }}</th>
             <th >{{ __('content.companies.table.name') }}</th>
             <th>{{ __('content.companies.table.email') }}</th>
             <th>{{ __('content.companies.table.phone') }}</th>
