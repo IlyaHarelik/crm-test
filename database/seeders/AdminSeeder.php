@@ -14,10 +14,11 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        if (!DB::table('users')->count())
+        if (! DB::table('users')->count()) {
             User::factory()->create([
                 'name' => 'admin',
                 'password' => Hash::make('q12345'),
             ]);
+        }
     }
 }

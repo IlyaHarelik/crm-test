@@ -11,9 +11,9 @@ use App\Models\Company;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Yajra\DataTables\Facades\Datatables;
-use Maatwebsite\Excel\Facades\Excel;
 
 class CompanyController extends Controller
 {
@@ -24,16 +24,16 @@ class CompanyController extends Controller
 
             return Datatables::of($companies)
                 ->addIndexColumn()
-                ->addColumn('action', function($row){
-                    return '<a href="javascript:void(0)" data-toggle="tooltip" onClick="editFunc(' . $row->id . ')" data-original-title="Edit" class="edit btn btn-success btn-sm">'
-                        . __('content.action.edit'). '<a href="javascript:void(0);" onClick="deleteFunc(' . $row->id . ')" data-toggle="tooltip" data-original-title="Delete" class="delete btn btn-danger btn-sm ml-2">'
-                        . __('content.action.delete'). '</a>';
+                ->addColumn('action', function ($row) {
+                    return '<a href="javascript:void(0)" data-toggle="tooltip" onClick="editFunc('.$row->id.')" data-original-title="Edit" class="edit btn btn-success btn-sm">'
+                        .__('content.action.edit').'<a href="javascript:void(0);" onClick="deleteFunc('.$row->id.')" data-toggle="tooltip" data-original-title="Delete" class="delete btn btn-danger btn-sm ml-2">'
+                        .__('content.action.delete').'</a>';
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
 
-        return view('pages.companies',);
+        return view('pages.companies');
     }
 
     public function store(CreateCompanyRequest $request): JsonResponse
@@ -47,7 +47,7 @@ class CompanyController extends Controller
 
         $company = Company::updateOrCreate(
             [
-                'id' => $request->id
+                'id' => $request->id,
             ],
             [
                 'name' => $request->name,
@@ -66,7 +66,7 @@ class CompanyController extends Controller
 
         $company = Company::find($id);
 
-        if (!$company) {
+        if (! $company) {
             return response()->json(['error' => 'Company not found'], 404);
         }
 
@@ -87,7 +87,7 @@ class CompanyController extends Controller
         return response()->json($company);
     }
 
-    public function destroy(DestroyCompanyRequest $id)
+    public function destroy(DestroyCompanyRequest $id): JsonResponse
     {
         /** @var Company $company */
         $company = Company::find($id)->first();
@@ -101,7 +101,7 @@ class CompanyController extends Controller
     public function edit(Request $request): JsonResponse
     {
         /** @var Company $company */
-        $company  = Company::where('id', $request->id)->first();
+        $company = Company::where('id', $request->id)->first();
 
         return Response()->json($company);
     }

@@ -6,6 +6,8 @@
 <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
 <!-- Theme style -->
 <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+<link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+<link href="{{ asset('dist/css/webkit.css') }}" rel="stylesheet" type="text/css">
 
 <link href="{{ asset('https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet">
 <script src="{{ asset('https://code.jquery.com/jquery-3.5.1.js') }}"></script>

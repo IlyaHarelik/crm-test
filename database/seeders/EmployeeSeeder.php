@@ -13,7 +13,7 @@ class EmployeeSeeder extends Seeder
      */
     public function run(): void
     {
-        if(!DB::table('employees')->count()) {
+        if (! DB::table('employees')->count()) {
             Employee::factory(60)->create();
         }
     }

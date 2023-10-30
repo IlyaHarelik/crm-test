@@ -21,7 +21,7 @@ class EmployeeController extends Controller
     {
         if ($request->ajax()) {
             $employees = Employee::all();
-            $transformedData = $employees->map(function($employee) {
+            $transformedData = $employees->map(function ($employee) {
                 return [
                     'id' => $employee->id,
                     'first_name' => $employee->first_name,
@@ -35,10 +35,10 @@ class EmployeeController extends Controller
 
             return Datatables::of($transformedData)
                 ->addIndexColumn()
-                ->addColumn('action', function($row){
-                    return '<a href="javascript:void(0)" data-toggle="tooltip" onClick="editFunc(' . $row['id'] . ')" data-original-title="Edit" class="edit btn btn-success btn-sm">'
-                        . __('content.action.edit'). '<a href="javascript:void(0);" onClick="deleteFunc(' . $row['id'] . ')" data-toggle="tooltip" data-original-title="Delete" class="delete btn btn-danger btn-sm ml-2">'
-                        . __('content.action.delete'). '</a>';
+                ->addColumn('action', function ($row) {
+                    return '<a href="javascript:void(0)" data-toggle="tooltip" onClick="editFunc('.$row['id'].')" data-original-title="Edit" class="edit btn btn-success btn-sm">'
+                        .__('content.action.edit').'<a href="javascript:void(0);" onClick="deleteFunc('.$row['id'].')" data-toggle="tooltip" data-original-title="Delete" class="delete btn btn-danger btn-sm ml-2">'
+                        .__('content.action.delete').'</a>';
                 })
                 ->rawColumns(['action'])
                 ->make(true);
@@ -46,14 +46,14 @@ class EmployeeController extends Controller
 
         $companies = Company::all();
 
-        return view('pages.employees',compact('companies'));
+        return view('pages.employees', compact('companies'));
     }
 
     public function store(CreateEmployeeRequest $request): JsonResponse
     {
         $employee = Employee::updateOrCreate(
             [
-                'id' => $request->id
+                'id' => $request->id,
             ],
             [
                 'first_name' => $request->first_name,
@@ -89,7 +89,7 @@ class EmployeeController extends Controller
         /** @var Employee $employee */
         $employee = Employee::find($id)->first();
 
-        if (!$employee) {
+        if (! $employee) {
             return response()->json(['error' => 'Employee not found'], 404);
         }
 
@@ -101,7 +101,7 @@ class EmployeeController extends Controller
     public function edit(Request $request): JsonResponse
     {
         /** @var Employee $employee */
-        $employee  = Employee::where('id', $request->id)->first();
+        $employee = Employee::where('id', $request->id)->first();
 
         return Response()->json($employee);
     }

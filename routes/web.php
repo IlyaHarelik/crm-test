@@ -42,11 +42,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
             'edit',
             'update',
             'destroy',
-            ]);
+        ]);
 
     Route::get('/export/employees', [EmployeeController::class, 'exportToExcel'])->name('employees.export');
 });
 
 Route::post('/language-switch', [LanguageController::class, 'languageSwitch'])->name('language.switch');
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

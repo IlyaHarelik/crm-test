@@ -13,7 +13,7 @@ class CompanySeeder extends Seeder
      */
     public function run(): void
     {
-        if (!DB::table('companies')->count()) {
+        if (! DB::table('companies')->count()) {
             Company::factory(20)->create();
         }
     }

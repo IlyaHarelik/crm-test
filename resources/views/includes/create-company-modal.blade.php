@@ -13,7 +13,7 @@
                 <form action="javascript:void(0)" id="companyForm" name="companyForm" class="form-horizontal"
                       method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="id" id="id">
-                    <div class="form-group">
+                    <div class="form-group bg-dark">
                         <label for="name"
                                class="col-sm-7 control-label">{{ __('content.companies.table.name') }}</label>
                         <div class="col-sm-12">
@@ -149,4 +149,6 @@
             }
         });
     }
+
 </script>
+

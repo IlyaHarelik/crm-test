@@ -39,8 +39,8 @@ return [
             'edit' => 'Edit a company',
         ],
         'message' => [
-            'add-success' => 'Company was added successfully.'
-        ]
+            'add-success' => 'Company was added successfully.',
+        ],
     ],
     'employees' => [
         'tab-title' => 'Employees | CRM',
@@ -67,7 +67,7 @@ return [
             'edit' => 'Edit employee',
         ],
         'message' => [
-            'add-success' => 'Employee was added successfully.'
-        ]
-    ]
+            'add-success' => 'Employee was added successfully.',
+        ],
+    ],
 ];

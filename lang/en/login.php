@@ -2,5 +2,5 @@
 
 return [
     'login' => 'Login',
-    'password' => 'Password'
+    'password' => 'Password',
 ];
